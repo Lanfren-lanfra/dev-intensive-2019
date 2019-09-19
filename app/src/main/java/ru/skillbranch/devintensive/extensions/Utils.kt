@@ -17,9 +17,23 @@ object Utils {
 
     }
 
+    /**
+     * возвращающий строку с первыми буквами имени и фамилии в верхнем регистре
+     */
+    fun toInitials(firstName: String?, lastName:String?):String? {
+        var f = emptyToNull(firstName)?.substring(0, 1)?.toUpperCase()
+        var l = emptyToNull(lastName)?.substring(0, 1)?.toUpperCase()
+        return when {
+            f == null && l == null -> null
+            f == null -> l
+            l ==null -> f
+            else -> "${f}${l}"
+        }
+    }
+
     private fun emptyToNull(str: String?): String? {
         when{
-            str.equals(null) || str!!.isEmpty() -> return null
+            str.equals(null) || str!!.isBlank() -> return null
              else -> return str
         }
     }
