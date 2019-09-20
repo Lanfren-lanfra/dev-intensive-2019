@@ -18,6 +18,8 @@ abstract class BaseMessage(
     abstract fun formatMessage(id: String, name: String, mode: String, type: String): String
 
     companion object MessageFactory {
+        var lastId = -1;
+
         fun makeMessage(
             from: User,
             chat: Chat,
@@ -25,19 +27,13 @@ abstract class BaseMessage(
             type: String,
             payload: Any,
             isIncoming: Boolean = false
-        ): String {
+        ): BaseMessage {
 
-            return """${from?.firstName}
-                    ${if (isIncoming) "получил" else "отправил"}
-                    ${if (type == "text") "сообщение" else "изображение"}
-                    ${when (payload) {
-                            is TextMessage -> payload.text
-                            else -> (payload as ImageMessage).url
-                        }
-                    }
-                    ${//TODO date format
-                            "" }
-                    """
+            lastId++
+            return when (type) {
+                "text" -> TextMessage("${lastId}", from, chat,isIncoming, date, payload as String)
+                else -> ImageMessage("${lastId}", from, chat,isIncoming, date, payload as String)
+            }
 
         }
     }
