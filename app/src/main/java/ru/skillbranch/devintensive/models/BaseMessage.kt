@@ -15,7 +15,7 @@ abstract class BaseMessage(
      * возвращает строку содержащюю информацию о id сообщения, имени получателя/отправителя,
      *  виде сообщения ("получил/отправил") и типе сообщения ("сообщение"/"изображение")
      */
-    abstract fun formatMessage(id: String, name: String, mode: String, type: String): String
+    abstract fun formatMessage(): String
 
     companion object MessageFactory {
         var lastId = -1;

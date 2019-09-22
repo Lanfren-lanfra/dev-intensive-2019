@@ -8,10 +8,10 @@ class TextMessage(
     chat: Chat,
     isIncoming: Boolean,
     date: Date,
-    var text: String
+    var text: String?
 
 ):BaseMessage(id, from , chat, isIncoming, date) {
-    override fun formatMessage(id: String, name: String, mode: String, type: String): String {
+    override fun formatMessage(): String {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
