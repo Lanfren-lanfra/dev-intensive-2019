@@ -32,30 +32,32 @@ enum class TimeUnits {
     SECOND,
     MINUTE,
     HOUR,
-    DAY
-}
+    DAY;
 
+    fun plural(value:Int): String{
 
-fun TimeUnits.plural(value:Int): String{
-
-    var declensions = when (this){
-        TimeUnits.SECOND -> listOf("секунду", "секунды", "секунд")
-        TimeUnits.MINUTE -> listOf("минуту", "минуты", "минут")
-        TimeUnits.HOUR -> listOf("час", "часа", "часов")
-        TimeUnits.DAY -> listOf("день", "дня", "дней")
-    }
-
-    var wordInDeclension = when (value % 100){
-        in (11..14) -> declensions[2]
-        else -> when (value % 10){
-            1 -> declensions[0]
-            in (2..4) -> declensions[1]
-            else -> declensions[2]
+        var declensions = when (this){
+            SECOND -> listOf("секунду", "секунды", "секунд")
+            MINUTE -> listOf("минуту", "минуты", "минут")
+            HOUR -> listOf("час", "часа", "часов")
+            DAY -> listOf("день", "дня", "дней")
         }
-    }
 
-    return "${value} ${wordInDeclension}"
+        var wordInDeclension = when (value % 100){
+            in (11..14) -> declensions[2]
+            else -> when (value % 10){
+                1 -> declensions[0]
+                in (2..4) -> declensions[1]
+                else -> declensions[2]
+            }
+        }
+
+        return "${value} ${wordInDeclension}"
+    }
 }
+
+
+
 
 fun Date.humanizeDiff(date:Date = Date()): String {
     var diff = (date.time - this.time)

@@ -12,6 +12,6 @@ class TextMessage(
 
 ):BaseMessage(id, from , chat, isIncoming, date) {
     override fun formatMessage(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return "$id $from ${if (isIncoming) "получил" else "отправил"} сообщение"
     }
 }
