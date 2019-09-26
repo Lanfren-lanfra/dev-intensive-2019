@@ -24,8 +24,8 @@ abstract class BaseMessage(
             from: User,
             chat: Chat,
             date: Date,
-            type: String,
             payload: Any,
+            type: String,
             isIncoming: Boolean = false
         ): BaseMessage {
 

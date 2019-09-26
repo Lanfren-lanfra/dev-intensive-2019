@@ -12,6 +12,6 @@ class TextMessage(
 
 ):BaseMessage(id, from , chat, isIncoming, date) {
     override fun formatMessage(): String {
-        return "$id $from ${if (isIncoming) "получил" else "отправил"} сообщение"
+        return "$id $from ${if (isIncoming) "получил" else "отправил"} сообщение \"$text\""
     }
 }

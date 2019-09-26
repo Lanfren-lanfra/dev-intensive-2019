@@ -12,6 +12,6 @@ class ImageMessage(
 
 ):BaseMessage(id, from , chat, isIncoming, date) {
     override fun formatMessage(): String {
-        return "$id $from ${if (isIncoming) "получил" else "отправил"} изображение"
+        return "$id $from ${if (isIncoming) "получил" else "отправил"} изображение \"$url\""
     }
 }
