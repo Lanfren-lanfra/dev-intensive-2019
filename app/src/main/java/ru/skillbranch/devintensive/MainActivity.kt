@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
 
-        outState?.putString(currentStateQuestion, bender.question.question)
+        outState?.putString(currentStateQuestion, bender.question.name)
         outState?.putString(currentStateStatus, bender.status.name)
         outState?.putInt(currentFailCounter, bender.failCounter)
     }
