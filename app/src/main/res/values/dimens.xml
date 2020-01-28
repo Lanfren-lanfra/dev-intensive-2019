@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--fonts -->
+    <dimen name="font_large_24">24sp</dimen>
+
+    <!-- spacing between views -->
+    <dimen name="space_large_24">24dp</dimen>
+    <dimen name="space_normal_16">16dp</dimen>
+    <dimen name="space_small_8">8dp</dimen>
+
+    <!-- paddings -->
+    <dimen name="pad_normal">10dp</dimen>
+</resources>
