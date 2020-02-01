@@ -18,6 +18,14 @@ class Bender(
     }
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
+
+        //валидация ответа перед проверкой
+        val (isValidAnswer, invalidMsg) = validateAnswer(answer)
+        if (!isValidAnswer){
+            return "${invalidMsg}\n${question.question}" to status.color
+        }
+
+
         return if (question.answers.contains(answer)) {
             question = question.nextQuestion()
             "Отлично - ты справился\n${question.question}" to status.color
@@ -32,6 +40,29 @@ class Bender(
                 "Это неправильный ответ\n${question.question}" to status.color
             }
         }
+    }
+
+    private fun validateAnswer(answer: String): Pair<Boolean, String?> {
+
+        val concreteValidation = when (question) {
+            Question.NAME -> AnswerValidation.VNAME
+            Question.PROFESSION -> AnswerValidation.VPROFESSION
+            Question.MATERIAL -> AnswerValidation.VMATERIAL
+            Question.BDAY -> AnswerValidation.VBDAY
+            Question.SERIAL -> AnswerValidation.VSERIAL
+            else -> null
+        }
+
+        if (concreteValidation == null){  //т.е. случай question == Question.IDLE
+            return true to null
+        }
+
+        val isValid = Regex(concreteValidation.regex).matches(answer)
+
+        return if (isValid)
+            true to null
+        else
+            false to concreteValidation.msg
     }
 
     enum class Status(val color: Triple<Int, Int, Int>) {
@@ -72,6 +103,15 @@ class Bender(
         },;
 
         abstract fun  nextQuestion():Question
+    }
+
+    enum class AnswerValidation( val regex:String, val msg:String ){
+        VNAME("[A-Z|А-Я]{1}.*", "Имя должно начинаться с заглавной буквы"),
+        VPROFESSION("[a-z|а-я]{1}.*", "Профессия должна начинаться со строчной буквы"),
+        VMATERIAL("[^0-9]+", "Материал не должен содержать цифр"),
+        VBDAY("[0-9]+", "Год моего рождения должен содержать только цифры"),
+        VSERIAL("//[0-9]{7}/", "Серийный номер содержит только цифры, и их 7");
+
     }
 }
 
